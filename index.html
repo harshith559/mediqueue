@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediQueue — Smart Hospital Queue</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩺</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">✚</span>
+    <div class="brand-text">
+      <span class="brand-name">MediQueue</span>
+      <span class="brand-tag">Smart Hospital Queue</span>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button class="tab is-active" data-view="checkin" role="tab" aria-selected="true">Check In</button>
+    <button class="tab" data-view="board" role="tab" aria-selected="false">Live Board</button>
+    <button class="tab" data-view="staff" role="tab" aria-selected="false">Staff Dashboard</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ============ CHECK-IN VIEW ============ -->
+  <section id="view-checkin" class="view is-active">
+    <div class="checkin-grid">
+
+      <form id="checkin-form" class="panel form-panel">
+        <h1>Join the queue</h1>
+        <p class="lede">Fill in your details and we'll place you in line for the right department.</p>
+
+        <label class="field">
+          <span>Full name</span>
+          <input type="text" id="patient-name" placeholder="e.g. Asha Verma" required>
+        </label>
+
+        <label class="field">
+          <span>Department</span>
+          <select id="patient-dept" required>
+            <option value="General">General Medicine</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Pediatrics">Pediatrics</option>
+            <option value="Orthopedics">Orthopedics</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Reason for visit (optional)</span>
+          <input type="text" id="patient-reason" placeholder="e.g. Follow-up checkup">
+        </label>
+
+        <fieldset class="field">
+          <legend>Severity</legend>
+          <div class="severity-picker" id="severity-picker">
+            <label class="severity-opt severity-normal">
+              <input type="radio" name="severity" value="Normal" checked>
+              <span>Normal</span>
+              <small>Routine visit</small>
+            </label>
+            <label class="severity-opt severity-urgent">
+              <input type="radio" name="severity" value="Urgent">
+              <span>Urgent</span>
+              <small>Needs prompt care</small>
+            </label>
+            <label class="severity-opt severity-emergency">
+              <input type="radio" name="severity" value="Emergency">
+              <span>Emergency</span>
+              <small>Immediate attention</small>
+            </label>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn-primary">Get my ticket</button>
+      </form>
+
+      <div class="panel ticket-panel">
+        <div class="ticket-preview" id="ticket-preview">
+          <span class="ticket-eyebrow">Your ticket will appear here</span>
+          <span class="ticket-number ticket-placeholder">—</span>
+          <span class="ticket-dept">Fill in the form to check in</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ LIVE BOARD VIEW ============ -->
+  <section id="view-board" class="view">
+    <div class="board-head">
+      <h1>Live queue board</h1>
+      <p class="lede">Real-time status across every department.</p>
+    </div>
+    <div class="board-grid" id="board-grid"><!-- department cards injected by script.js --></div>
+  </section>
+
+  <!-- ============ STAFF DASHBOARD VIEW ============ -->
+  <section id="view-staff" class="view">
+    <div class="board-head">
+      <h1>Staff dashboard</h1>
+      <p class="lede">Call the next patient and manage every department's line.</p>
+    </div>
+
+    <div class="stats-row" id="stats-row"><!-- injected --></div>
+
+    <div class="staff-grid" id="staff-grid"><!-- department queue panels injected --></div>
+  </section>
+
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
